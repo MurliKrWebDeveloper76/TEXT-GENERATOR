@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lecture Entry</title>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      padding: 20px;
+      margin: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffffcc;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    .output {
+      background: #ffffff;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    .copy {
+      background-color: #3498db;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #6EE7B7, #3B82F6);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      font-size: 18px;
+      z-index: 1000;
+    }
+    @media only screen and (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      .popup {
+        width: 80%;
+        font-size: 16px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" data-aos="fade-up">
+    <h2 data-aos="zoom-in">Lecture Details</h2>
+    <label>𝗟𝗲𝗰𝘁𝘂𝗿𝗲 - Lecture Name</label>
+    <input id="lectureName" type="text" placeholder="LINES AND ANGLES LECTURE 1"><label>𝗗𝗮𝘁𝗲</label>
+<input id="lectureDate" type="date" value="2025-06-19">
+
+<label>𝗖𝗹𝗮𝘀𝘀 𝗧𝗶𝗺𝗲</label>
+<input id="classTime" type="text" placeholder="e.g., 4:30 PM">
+
+<label>𝗖𝗼𝘂𝗿𝘀𝗲</label>
+<select id="course">
+  <option value="Aarmbh">Aarmbh</option>
+  <option value="NEEV 2026">NEEV 2026</option>
+  <option value="NEEV GOAT">NEEV GOAT</option>
+</select>
+
+<label>𝗟𝗲𝗰𝘁𝘂𝗿𝗲 𝗟𝗶𝗻𝗸</label>
+<input id="lectureLink" type="url" placeholder="https://yourlink.com">
+
+<button onclick="generateText()">Generate</button>
+<button class="copy" onclick="copyText()">Copy</button>
+
+<div id="output" class="output" data-aos="fade-up"></div>
+
+  </div>  <div id="popup" class="popup">Copied to clipboard!</div>  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>  <script>
+    AOS.init();
+
+    function generateText() {
+      const name = document.getElementById('lectureName').value;
+      const date = document.getElementById('lectureDate').value;
+      const time = document.getElementById('classTime').value || 'null';
+      const course = document.getElementById('course').value;
+      const link = document.getElementById('lectureLink').value;
+
+      const text = `𝗟𝗲𝗰𝘁𝘂𝗿𝗲 - ${name}\n𝗗𝗮𝘁𝗲 - ${date}\n𝗖𝗹𝗮𝘀𝘀 𝗧𝗶𝗺𝗲 - ${time}\n𝗖𝗼𝘂𝗿𝘀𝗲 - ${course}\n𝗟𝗲𝗰𝘁𝘂𝗿𝗲 𝗟𝗶𝗻𝗸 -\n${link}`;
+
+      document.getElementById('output').innerText = text;
+    }
+
+    function copyText() {
+      const text = document.getElementById('output').innerText;
+      navigator.clipboard.writeText(text)
+        .then(() => showPopup())
+        .catch(err => alert('Copy failed!', err));
+    }
+
+    function showPopup() {
+      const popup = document.getElementById('popup');
+      popup.style.display = 'block';
+      setTimeout(() => {
+        popup.style.display = 'none';
+      }, 2000);
+    }
+  </script></body>
+</html>
